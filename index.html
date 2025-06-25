@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcane Memory Game</title>
+  <link rel="shortcut icon" href="./assets/images/icons/arcane-X.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header class="header">
+    <img src="./assets/images/icons/ro.png" alt="arcane-icon" width="100px" class="icone-header">
+    <h1>Arcane Memory Game</h1>
+  </header>
+
+  <div class="container">
+
+    <!--scoreboard-->
+    <div class="scoreboard-section">
+
+      <div class="scoreboard">
+        <div class="timer" id="timer">
+          <div class="timer_label">Timer</div>
+          00:00
+        </div>
+
+        <div class="score-moves_section">
+          <div class="box__score-moves_section" id="moves-container">
+            <div class="score-moves_lebel">Moves</div>
+            0
+          </div>
+          <div class="box__score-moves_section" id="score-container">
+            <div class="score-moves_lebel">Score</div>
+            0
+          </div>
+        </div>
+      </div>
+
+      <button class="restart-btn" id="restart" onclick="restartGame()">restart</button>
+
+    </div>
+
+    <!--gameboard-->
+    <div class="game-board" id="game-board">
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/1c.jpg" alt="pic1" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/1c.jpg" alt="pic2" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/2c.jpg" alt="pic3" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/2c.jpg" alt="pic4" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/3c.jpg" alt="pic5" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/3c.jpg" alt="pic6" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/4c.jpg" alt="pic7" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/4c.jpg" alt="pic8" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/5c.jpg" alt="pic9" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/5c.jpg" alt="pic10" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/6c.jpg" alt="pic11" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/6c.jpg" alt="pic12" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/7c.jpg" alt="pic13" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/7c.jpg" alt="pic14" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/8c.jpg" alt="pic15" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content-card">
+          <div class="face-front__card">
+            <img src="./assets/images/arcane/8c.jpg" alt="pic16" class="img__card" />
+          </div>
+          <div class="face-back__card"><img src="./assets/images/background/1.jpg" alt="background"
+              class="img-face-back__card" width="180px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--needhelpsection-->
+    <div class="Need-help-container">
+      <button class="helpbtn" id="helpbtn">Need help <b class="question-mark">?</b></button>
+
+      <div>
+        <div class="Need-help-desc" id="helpsection">
+          <h2>Game Instructions</h2>
+          <p>
+            Test your memory and focus by uncovering all matching card pairs. Each round begins with a randomized
+            layout, so no two games are ever the same.
+          </p>
+          <ul>
+            <li>🃏 Flip two cards per turn to reveal what's underneath.</li>
+            <li>🎯 If the cards match, they’ll disappear from the board.</li>
+            <li>🔄 If they don’t, they’ll flip back over.</li>
+            <li>🔁 You can restart the game whenever you'd like to try again or improve your score.</li>
+          </ul>
+          <div class="Need-help-desc-btn">
+            <button id="closeHelpBtn">OKay</button>
+            <img src="./assets/images/icons/arcane-X.png" width="150px" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--winpopup-->
+    <div id="winPopup" class="win-popup">
+      <div class="win-popup__content">
+        <img src="./assets/images/icons/arcane-X.png" alt="Trophy" />
+        <p>
+          Great job! 👏 Are you ready for another challenge? 😉
+        </p>
+        <button onclick="closeWinPopup()">I'm ready</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
