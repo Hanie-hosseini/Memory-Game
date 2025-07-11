@@ -7,6 +7,10 @@ const timerEl = document.getElementById("timer");
 const movesEl = document.getElementById("moves-container");
 const scoreEl = document.getElementById("score-container");
 
+const winPopup = document.getElementById("winPopup");
+const losePopup = document.getElementById("losePopup");
+const restartBtn = document.getElementById("restartBtn");
+
 let cards = [];
 let matchedCards = 0;
 let selectedCards = [];
@@ -27,24 +31,21 @@ for (let i = 0; i < cards.length; i++) {
 }
 
 board.innerHTML = "";
-
 for (const card of cards) {
   board.appendChild(card);
 }
-
-
 
 function hideCards() {
   for (const card of cards) {
     card.classList.add("card--hidden");
   }
 }
-
 setTimeout(hideCards, 2000);
 
 function onCardClick(event) {
   const card = event.currentTarget;
-  if (selectedCards.length < 2) {
+
+  if (selectedCards.length < 2 && !card.classList.contains("card--matched") && !card.classList.contains("card--disabled")) {
     card.classList.remove("card--hidden");
     selectedCards.push(card);
     card.removeEventListener("click", onCardClick);
@@ -69,7 +70,7 @@ function onCardClick(event) {
   }
 }
 
-const matched = () => {
+function matched() {
   selectedCards[0].classList.add("card--matched");
   selectedCards[1].classList.add("card--matched");
 
@@ -79,9 +80,9 @@ const matched = () => {
   if (matchedCards === cards.length / 2) {
     showWinPopup();
   }
-};
+}
 
-const notMatched = () => {
+function notMatched() {
   disableAll();
   selectedCards[0].classList.add("card-notmatched");
   selectedCards[1].classList.add("card-notmatched");
@@ -99,44 +100,58 @@ const notMatched = () => {
     selectedCards = [];
     enableAll();
   }, 1000);
-};
+}
 
-const disableAll = () => {
+function disableAll() {
   for (const card of cards) {
     card.classList.add("card--disabled");
+    card.removeEventListener("click", onCardClick);
   }
-};
+}
 
-const enableAll = () => {
+function enableAll() {
   for (const card of cards) {
-    card.classList.remove("card--disabled");
+    if (!card.classList.contains("card--matched")) {
+      card.classList.remove("card--disabled");
+      card.addEventListener("click", onCardClick);
+    }
   }
-};
+}
 
-for (const card of cards) {
-  card.addEventListener("click", onCardClick);
+function updateMoves() {
+  moves++;
+  movesEl.innerHTML = `<div class="score-moves_lebel">Moves</div>${moves}`;
+
+  if (moves > 18 && matchedCards < cards.length / 2) {
+    showLosePopup();
+  }
+}
+
+function updateScore(points) {
+  score += points;
+  scoreEl.innerHTML = `<div class="score-moves_lebel">Score</div>${score}`;
 }
 
 function showWinPopup() {
-  document.getElementById("winPopup").style.display = "flex";
+  winPopup.style.display = "flex";
   stopTimer();
+  disableAll();
 }
 
-function closeWinPopup() {
-  document.getElementById("winPopup").style.display = "none";
-  restartGame();
+function showLosePopup() {
+  losePopup.style.display = "flex";
+  stopTimer();
+  disableAll();
 }
-
-helpbtn.addEventListener("click", () => {
-  helpsection.style.display = "block";
-});
-
-closeHelpBtn.addEventListener("click", () => {
-  helpsection.style.display = "none";
-});
 
 function restartGame() {
   window.location.reload();
+}
+
+function startGame() {
+  resetTimer();
+  resetScoreboard();
+  startTimer();
 }
 
 function startTimer() {
@@ -150,19 +165,12 @@ function runTimer() {
   let mins = Math.floor(seconds / 60);
   let secs = seconds % 60;
 
-  if (mins < 10) {
-    mins = "0" + mins;
-  } else {
-    mins = String(mins);
-  }
+  mins = mins < 10 ? "0" + mins : String(mins);
+  secs = secs < 10 ? "0" + secs : String(secs);
 
-  if (secs < 10) {
-    secs = "0" + secs;
-  } else {
-    secs = String(secs);
-  }
-  timerEl.innerHTML = `<div class="">Timer</div>${mins}:${secs}`;
+  timerEl.innerHTML = `<div class="">Timer</div
 
+>${mins}:${secs}`;
   seconds++;
 
   setTimeout(() => {
@@ -180,16 +188,6 @@ function resetTimer() {
   timerEl.innerHTML = `<div class="timer_label">Timer</div>00:00`;
 }
 
-function updateMoves() {
-  moves++;
-  movesEl.innerHTML = `<div class="score-moves_lebel">Moves</div>${moves}`;
-}
-
-function updateScore(points) {
-  score += points;
-  scoreEl.innerHTML = `<div class="score-moves_lebel">Score</div>${score}`;
-}
-
 function resetScoreboard() {
   moves = 0;
   score = 0;
@@ -197,8 +195,20 @@ function resetScoreboard() {
   scoreEl.innerHTML = `<div class="score-moves_lebel">Score</div>0`;
 }
 
-function startGame() {
-  resetTimer();
-  resetScoreboard();
-  startTimer();
+// btn help
+helpbtn.addEventListener("click", () => {
+  helpsection.style.display = "block";
+});
+
+closeHelpBtn.addEventListener("click", () => {
+  helpsection.style.display = "none";
+});
+
+restartBtn.addEventListener("click", () => {
+  losePopup.style.display = "none";
+  restartGame();
+});
+
+for (const card of cards) {
+  card.addEventListener("click", onCardClick);
 }

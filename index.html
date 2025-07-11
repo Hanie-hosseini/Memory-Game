@@ -40,6 +40,7 @@
         </div>
       </div>
 
+
       <button class="restart-btn" id="restart" onclick="restartGame()">restart</button>
 
     </div>
@@ -224,6 +225,7 @@
             <li>🎯 If the cards match, they’ll disappear from the board.</li>
             <li>🔄 If they don’t, they’ll flip back over.</li>
             <li>🔁 You can restart the game whenever you'd like to try again or improve your score.</li>
+            <li>❌ Be careful — if you exceed 18 moves, you lose the game!</li>
           </ul>
           <div class="Need-help-desc-btn">
             <button id="closeHelpBtn">OKay</button>
@@ -243,6 +245,16 @@
         <button onclick="closeWinPopup()">I'm ready</button>
       </div>
     </div>
+
+
+    <div id="losePopup" class="popup-overlay" style="display: none;">
+      <div class="popup-box">
+        <h2>You Lost 😢</h2>
+        <p>You made more than 18 moves.</p>
+        <button id="restartBtn">Try Again</button>
+      </div>
+    </div>
+
   </div>
 
 </body>
